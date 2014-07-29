@@ -49,9 +49,9 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/rootdir/etc/init.recovery.universal5420.rc:/init.recovery.universal5420.rc
 
 # Audio
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/audio_policy.conf:system/etc/audio_policy.conf \
-    $(LOCAL_PATH)/configs/audio_effects.conf:system/etc/audio_effects.conf
+# PRODUCT_COPY_FILES += \
+#     $(LOCAL_PATH)/configs/audio_policy.conf:system/etc/audio_policy.conf \
+#     $(LOCAL_PATH)/configs/audio_effects.conf:system/etc/audio_effects.conf
 
 PRODUCT_PACKAGES += \
     audio.a2dp.default \
