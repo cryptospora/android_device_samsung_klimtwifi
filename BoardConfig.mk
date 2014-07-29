@@ -50,7 +50,7 @@ ARCH_ARM_HAVE_TLS_REGISTER := true
 BOARD_KERNEL_BASE := 0x10000000
 BOARD_KERNEL_PAGESIZE := 2048
 TARGET_KERNEL_CONFIG := klimtwifi_01_defconfig
-TARGET_KERNEL_SOURCE := kernel/samsung/klimtwifi
+TARGET_KERNEL_SOURCE := kernel/samsung/exynos5420
 #TARGET_PREBUILT_KERNEL := device/samsung/klimtwifi/kernel
 
 # Boot animation
