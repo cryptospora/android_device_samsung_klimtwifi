@@ -88,7 +88,7 @@ on an android-powered device.
 
       <Audio codec="aac"
              bitRate="128000"
-             sampleRate="48000"
+             sampleRate="44100"
              channels="2" />
     </EncoderProfile>
 
@@ -101,7 +101,7 @@ on an android-powered device.
 
       <Audio codec="aac"
              bitRate="128000"
-             sampleRate="48000"
+             sampleRate="44100"
              channels="2" />
     </EncoderProfile>
 
@@ -114,7 +114,7 @@ on an android-powered device.
 
       <Audio codec="aac"
              bitRate="128000"
-             sampleRate="48000"
+             sampleRate="44100"
              channels="2" />
     </EncoderProfile>
 
@@ -127,7 +127,7 @@ on an android-powered device.
 
       <Audio codec="aac"
              bitRate="128000"
-             sampleRate="48000"
+             sampleRate="44100"
              channels="2" />
     </EncoderProfile>
 
@@ -140,7 +140,7 @@ on an android-powered device.
 
       <Audio codec="aac"
              bitRate="128000"
-             sampleRate="48000"
+             sampleRate="44100"
              channels="2" />
     </EncoderProfile>
 
@@ -153,7 +153,7 @@ on an android-powered device.
 
             <Audio codec="aac"
              bitRate="128000"
-             sampleRate="48000"
+             sampleRate="44100"
              channels="2" />
     </EncoderProfile>
 
@@ -166,7 +166,7 @@ on an android-powered device.
 
       <Audio codec="aac"
              bitRate="128000"
-             sampleRate="48000"
+             sampleRate="44100"
              channels="2" />
     </EncoderProfile>
 
@@ -183,7 +183,7 @@ does not capture audio
 -->
       <Audio codec="aac"
              bitRate="128000"
-             sampleRate="48000"
+             sampleRate="44100"
              channels="2" />
     </EncoderProfile>
 
@@ -200,7 +200,7 @@ does not capture audio
 -->
       <Audio codec="aac"
              bitRate="128000"
-             sampleRate="48000"
+             sampleRate="44100"
              channels="2" />
     </EncoderProfile>
 
@@ -217,7 +217,7 @@ does not capture audio
 -->
       <Audio codec="aac"
              bitRate="128000"
-             sampleRate="48000"
+             sampleRate="44100"
              channels="2" />
     </EncoderProfile>
 
@@ -234,7 +234,7 @@ does not capture audio
 -->
       <Audio codec="aac"
              bitRate="128000"
-             sampleRate="48000"
+             sampleRate="44100"
              channels="2" />
     </EncoderProfile>
 
@@ -251,7 +251,7 @@ does not capture audio
 -->
             <Audio codec="aac"
              bitRate="128000"
-             sampleRate="48000"
+             sampleRate="44100"
              channels="2" />
     </EncoderProfile>
 
@@ -268,7 +268,7 @@ does not capture audio
 -->
      <Audio codec="aac"
              bitRate="128000"
-             sampleRate="48000"
+             sampleRate="44100"
              channels="2" />
     </EncoderProfile>
 
@@ -285,7 +285,7 @@ does not capture audio
 -->
       <Audio codec="aac"
              bitRate="128000"
-             sampleRate="48000"
+             sampleRate="44100"
              channels="2" />
     </EncoderProfile>
 
@@ -308,7 +308,7 @@ does not capture audio
 
       <Audio codec="aac"
              bitRate="128000"
-             sampleRate="48000"
+             sampleRate="44100"
              channels="2" />
     </EncoderProfile>
 
@@ -321,7 +321,7 @@ does not capture audio
 
       <Audio codec="aac"
              bitRate="128000"
-             sampleRate="48000"
+             sampleRate="44100"
              channels="2" />
     </EncoderProfile>
 
@@ -334,7 +334,7 @@ does not capture audio
 
       <Audio codec="aac"
              bitRate="128000"
-             sampleRate="48000"
+             sampleRate="44100"
              channels="2" />
     </EncoderProfile>
 
@@ -347,7 +347,7 @@ does not capture audio
 
       <Audio codec="aac"
              bitRate="128000"
-             sampleRate="48000"
+             sampleRate="44100"
              channels="2" />
     </EncoderProfile>
 
@@ -360,7 +360,7 @@ does not capture audio
 
       <Audio codec="aac"
              bitRate="128000"
-             sampleRate="48000"
+             sampleRate="44100"
              channels="2" />
     </EncoderProfile>
 
@@ -373,7 +373,7 @@ does not capture audio
 
       <Audio codec="aac"
              bitRate="128000"
-             sampleRate="48000"
+             sampleRate="44100"
              channels="2" />
     </EncoderProfile>
 
@@ -386,7 +386,7 @@ does not capture audio
 
       <Audio codec="aac"
              bitRate="128000"
-             sampleRate="48000"
+             sampleRate="44100"
              channels="2" />
     </EncoderProfile>
 
@@ -403,7 +403,7 @@ does not capture audio
 -->
       <Audio codec="aac"
              bitRate="128000"
-             sampleRate="48000"
+             sampleRate="44100"
              channels="2" />
     </EncoderProfile>
 
@@ -420,7 +420,7 @@ does not capture audio
 -->
       <Audio codec="aac"
              bitRate="128000"
-             sampleRate="48000"
+             sampleRate="44100"
              channels="2" />
     </EncoderProfile>
 
@@ -437,7 +437,7 @@ does not capture audio
 -->
       <Audio codec="aac"
 bitRate="128000"
-sampleRate="48000"
+sampleRate="44100"
 channels="2" />
     </EncoderProfile>
 
@@ -454,7 +454,7 @@ does not capture audio
 -->
       <Audio codec="aac"
              bitRate="128000"
-             sampleRate="48000"
+             sampleRate="44100"
              channels="2" />
     </EncoderProfile>
 
@@ -471,7 +471,7 @@ does not capture audio
 -->
             <Audio codec="aac"
              bitRate="128000"
-             sampleRate="48000"
+             sampleRate="44100"
              channels="2" />
     </EncoderProfile>
 
@@ -488,7 +488,7 @@ does not capture audio
 -->
       <Audio codec="aac"
              bitRate="128000"
-             sampleRate="48000"
+             sampleRate="44100"
              channels="2" />
     </EncoderProfile>
 
@@ -505,7 +505,7 @@ does not capture audio
 -->
       <Audio codec="aac"
              bitRate="128000"
-             sampleRate="48000"
+             sampleRate="44100"
              channels="2" />
     </EncoderProfile>
 
@@ -544,7 +544,7 @@ or query the capabilities of the codec at all if it is disabled
 
     <AudioEncoderCap name="aac" enabled="true"
       minBitRate="8192" maxBitRate="256000"
-        minSampleRate="8000" maxSampleRate="48000"
+        minSampleRate="8000" maxSampleRate="44100"
         minChannels="1" maxChannels="2" />
 
     <AudioEncoderCap name="amrwb" enabled="true"

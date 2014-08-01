@@ -27,8 +27,6 @@ include $(LOCAL_PATH)/BoardConfig.mk
 
 LOCAL_PATH := device/samsung/klimtwifi
 
-# overlays
-DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay
 PRODUCT_CHARACTERISTICS := tablet
 
 # Boot animation
@@ -49,13 +47,12 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/rootdir/etc/init.recovery.universal5420.rc:/init.recovery.universal5420.rc
 
 # Audio
-# PRODUCT_COPY_FILES += \
-#     $(LOCAL_PATH)/configs/audio_policy.conf:system/etc/audio_policy.conf \
-#     $(LOCAL_PATH)/configs/audio_effects.conf:system/etc/audio_effects.conf
+PRODUCT_COPY_FILES += \
+     $(LOCAL_PATH)/configs/audio_effects.conf:system/etc/audio_effects.conf
 
 PRODUCT_PACKAGES += \
+    audio.primary.universal5420 \
     audio.a2dp.default \
-    audio.usb.default \
     mixer_paths.xml \
     tinymix
 
@@ -70,10 +67,13 @@ PRODUCT_PACKAGES += \
 
 # HW composer
 PRODUCT_PACKAGES += \
-    libion 
-
-PRODUCT_PACKAGES += \
+    libion \
+    hwcomposer.exynos5 \
     gralloc.exynos5
+
+# IR
+PRODUCT_PACKAGES += \
+     consumerir.universal5420
 
 # MobiCore setup
 PRODUCT_PACKAGES += \
@@ -84,9 +84,9 @@ PRODUCT_PACKAGES += \
         mcDriverDaemon
 
 # Keylayouts
-#PRODUCT_COPY_FILES += \
-#    vendor/samsung/klimtwifi/proprietary/usr/idc/Synaptics_HID_TouchPad.idc:system/usr/idc/Synaptics_HID_TouchPad.idc \
-#    vendor/samsung/klimtwifi/proprietary//usr/keylayout/gpio-keys.kl:system/usr/keylayout/gpio-keys.kl \
+PRODUCT_COPY_FILES += \
+    vendor/samsung/klimtwifi/proprietary/usr/idc/Synaptics_HID_TouchPad.idc:system/usr/idc/Synaptics_HID_TouchPad.idc \
+    vendor/samsung/klimtwifi/proprietary//usr/keylayout/gpio-keys.kl:system/usr/keylayout/gpio-keys.kl \
 
 # Media profile
 PRODUCT_COPY_FILES += \
@@ -105,13 +105,15 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     Torch
 
+# Radio
+PRODUCT_PACKAGES += \
+    libsecril-client \
+    libsecril-client-sap
+
 # Wifi
 PRODUCT_PACKAGES += \
     libnetcmdiface \
     macloader
-
-# PRODUCT_COPY_FILES += \
-#     $(LOCAL_PATH)/configs/wpa_supplicant_overlay.conf:system/etc/wifi/wpa_supplicant_overlay.conf
 
 # Set default USB interface
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
@@ -126,7 +128,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.sf.lcd_density=320 \
     ro.opengles.version=131072 \
-    wifi.interface=wlan0
 
 # Permissions
 PRODUCT_COPY_FILES += \

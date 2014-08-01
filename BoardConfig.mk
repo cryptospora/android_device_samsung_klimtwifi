@@ -51,7 +51,7 @@ BOARD_KERNEL_BASE := 0x10000000
 BOARD_KERNEL_PAGESIZE := 2048
 TARGET_KERNEL_CONFIG := klimtwifi_01_defconfig
 TARGET_KERNEL_SOURCE := kernel/samsung/exynos5420
-#TARGET_PREBUILT_KERNEL := device/samsung/klimtwifi/kernel
+TARGET_PREBUILT_KERNEL := device/samsung/klimtwifi/kernel
 
 # Boot animation
 TARGET_BOOTANIMATION_PRELOAD := true
@@ -88,6 +88,15 @@ TARGET_RECOVERY_PIXEL_FORMAT := BGRA_8888
 TARGET_USERIMAGES_USE_EXT4 := true
 BOARD_RECOVERY_SWIPE := true
 RECOVERY_GRAPHICS_USE_LINELENGTH := true
+
+# GSC
+BOARD_USES_ONLY_GSC0_GSC1 := true
+
+# FIMG2D
+BOARD_USES_SKIA_FIMGAPI := true
+
+# NFC
+BOARD_HAVE_NFC := false
 
 # SELinux
 BOARD_SEPOLICY_DIRS += \
@@ -130,3 +139,32 @@ BOARD_USES_HWC_SERVICES := true
 
 # SCALER
 BOARD_USES_SCALER := true
+
+# FIMG2D
+BOARD_USES_SKIA_FIMGAPI := true
+BOARD_USES_NEON_BLITANTIH := true
+
+# Media
+COMMON_GLOBAL_CFLAGS += -DUSE_NATIVE_SEC_NV12TILED # use format from fw/native
+
+#SurfaceFlinger
+BOARD_USES_SYNC_MODE_FOR_MEDIA := true
+
+# Bluetooth
+BOARD_HAVE_BLUETOOTH := true
+BOARD_HAVE_BLUETOOTH_BCM := true
+# BOARD_BLUEDROID_VENDOR_CONF := $(LOCAL_PATH)/bluetooth/libbt_vndcfg.txt
+
+# Wifi
+BOARD_HAVE_SAMSUNG_WIFI          := true
+BOARD_WLAN_DEVICE                := bcmdhd
+WPA_SUPPLICANT_VERSION           := VER_0_8_X
+BOARD_WPA_SUPPLICANT_DRIVER      := NL80211
+BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_bcmdhd
+BOARD_HOSTAPD_DRIVER             := NL80211
+BOARD_HOSTAPD_PRIVATE_LIB        := lib_driver_cmd_bcmdhd
+WIFI_DRIVER_FW_PATH_PARAM        := "/sys/module/dhd/parameters/firmware_path"
+
+# inherit from the proprietary version
+-include vendor/samsung/i9500/BoardConfigVendor.mk
+
