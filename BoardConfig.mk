@@ -114,10 +114,7 @@ BOARD_SEPOLICY_UNION := \
 -include vendor/samsung/klimtwifi/BoardConfigVendor.mk
 
 # Audio
-BOARD_USES_GENERIC_AUDIO := false
-BOARD_USES_ALSA_AUDIO := true
-BOARD_USES_LEGACY_ALSA_AUDIO := true
-BOARD_USES_AUDIO_CODEC := ak4953
+BOARD_USES_LIBMEDIA_WITH_AUDIOPARAMETER := true
 
 # Samsung OpenMAX Video
 BOARD_USE_STOREMETADATA := true
@@ -153,7 +150,7 @@ BOARD_USES_SYNC_MODE_FOR_MEDIA := true
 # Bluetooth
 BOARD_HAVE_BLUETOOTH := true
 BOARD_HAVE_BLUETOOTH_BCM := true
-# BOARD_BLUEDROID_VENDOR_CONF := $(LOCAL_PATH)/bluetooth/libbt_vndcfg.txt
+BOARD_BLUEDROID_VENDOR_CONF := $(LOCAL_PATH)/bluetooth/libbt_vndcfg.txt
 
 # Wifi
 BOARD_HAVE_SAMSUNG_WIFI          := true
@@ -164,6 +161,19 @@ BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_bcmdhd
 BOARD_HOSTAPD_DRIVER             := NL80211
 BOARD_HOSTAPD_PRIVATE_LIB        := lib_driver_cmd_bcmdhd
 WIFI_DRIVER_FW_PATH_PARAM        := "/sys/module/dhd/parameters/firmware_path"
+WIFI_DRIVER_FW_PATH_STA          := "/system/etc/wifi/bcmdhd_sta.bin"
+
+# Camera
+BOARD_USE_STOREMETADATA := true
+BOARD_USE_METADATABUFFERTYPE := true
+BOARD_USE_DMA_BUF := true
+BOARD_USE_ANB_OUTBUF_SHARE := true
+BOARD_USE_GSC_RGB_ENCODER := true
+BOARD_USE_IMPROVED_BUFFER := true
+COMMON_GLOBAL_CFLAGS += -DDISABLE_HW_ID_MATCH_CHECK
+COMMON_GLOBAL_CFLAGS += -DNEEDS_VECTORIMPL_SYMBOLS
+COMMON_GLOBAL_CFLAGS += -DSAMSUNG_CAMERA_HARDWARE
+COMMON_GLOBAL_CFLAGS += -DSAMSUNG_DVFS
 
 # inherit from the proprietary version
 -include vendor/samsung/i9500/BoardConfigVendor.mk

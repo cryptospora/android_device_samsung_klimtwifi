@@ -47,12 +47,11 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/rootdir/etc/init.recovery.universal5420.rc:/init.recovery.universal5420.rc
 
 # Audio
-PRODUCT_COPY_FILES += \
-     $(LOCAL_PATH)/configs/audio_effects.conf:system/etc/audio_effects.conf
-
 PRODUCT_PACKAGES += \
     audio.primary.universal5420 \
     audio.a2dp.default \
+    audio.usb.default \
+    audio.r_submix.default \
     mixer_paths.xml \
     tinymix
 
@@ -71,17 +70,21 @@ PRODUCT_PACKAGES += \
     hwcomposer.exynos5 \
     gralloc.exynos5
 
+# Sensors
+PRODUCT_PACKAGES += \
+    sensors.universal5420
+
 # IR
 PRODUCT_PACKAGES += \
-     consumerir.universal5420
+    consumerir.universal5420
 
 # MobiCore setup
 PRODUCT_PACKAGES += \
-        libMcClient \
-        libMcRegistry \
-        libPaApi \
-        libgdmcprov \
-        mcDriverDaemon
+    libMcClient \
+    libMcRegistry \
+    libPaApi \
+    libgdmcprov \
+    mcDriverDaemon
 
 # Keylayouts
 PRODUCT_COPY_FILES += \
@@ -127,11 +130,11 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # System properties
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.sf.lcd_density=320 \
-    ro.opengles.version=131072 \
+    ro.opengles.version=196608 
 
 # Permissions
 PRODUCT_COPY_FILES += \
-    frameworks/native/data/etc/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml \
+    frameworks/native/data/etc/tablet_core_hardware.xml:system/etc/permissions/tablet_core_hardware.xml \
     frameworks/native/data/etc/android.hardware.location.gps.xml:system/etc/permissions/android.hardware.location.gps.xml \
     frameworks/native/data/etc/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml \
     frameworks/native/data/etc/android.hardware.wifi.direct.xml:system/etc/permissions/android.hardware.wifi.direct.xml \
@@ -143,15 +146,11 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.sensor.barometer.xml:system/etc/permissions/android.hardware.sensor.barometer.xml \
     frameworks/native/data/etc/android.hardware.sensor.stepdetector.xml:system/etc/permissions/android.hardware.sensor.stepdetector.xml \
     frameworks/native/data/etc/android.hardware.sensor.stepcounter.xml:system/etc/permissions/android.hardware.sensor.stepcounter.xml \
+    frameworks/native/data/etc/android.hardware.sensor.accelerometer.xml:system/etc/permissions/android.hardware.sensor.accelerometer.xml \
     frameworks/native/data/etc/android.hardware.touchscreen.multitouch.distinct.xml:system/etc/permissions/android.hardware.touchscreen.multitouch.distinct.xml \
     frameworks/native/data/etc/android.hardware.usb.accessory.xml:system/etc/permissions/android.hardware.usb.accessory.xml \
     frameworks/native/data/etc/android.hardware.usb.host.xml:system/etc/permissions/android.hardware.usb.host.xml \
     frameworks/native/data/etc/android.software.sip.voip.xml:system/etc/permissions/android.software.sip.voip.xml \
-    frameworks/native/data/etc/android.hardware.sensor.compass.xml:system/etc/permissions/android.hardware.compass.xml \
-    frameworks/base/nfc-extras/com.android.nfc_extras.xml:system/etc/permissions/com.android.nfc_extras.xml \
-    frameworks/native/data/etc/android.hardware.nfc.xml:system/etc/permissions/android.hardware.nfc.xml \
-    frameworks/native/data/etc/com.nxp.mifare.xml:system/etc/permissions/com.nxp.mifare.xml \
-    frameworks/native/data/etc/android.hardware.telephony.gsm.xml:system/etc/permissions/android.hardware.telephony.gsm.xml \
     frameworks/native/data/etc/android.hardware.bluetooth_le.xml:system/etc/permissions/android.hardware.bluetooth_le.xml
 
 # Device uses high-density artwork where available
