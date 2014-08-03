@@ -103,12 +103,7 @@ BOARD_SEPOLICY_DIRS += \
     device/samsung/klimtwifi/sepolicy
 
 BOARD_SEPOLICY_UNION := \
-    file_contexts \
-    device.te \
-    domain.te \
-    mediaserver.te \
-    surfaceflinger.te \
-    system.te
+    file_contexts 
 
 # inherit from the proprietary version
 -include vendor/samsung/klimtwifi/BoardConfigVendor.mk
