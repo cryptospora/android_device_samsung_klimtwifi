@@ -58,7 +58,13 @@ PRODUCT_PACKAGES += \
     mixer_paths.xml \
     tinymix
 
+# GPS
 PRODUCT_PACKAGES += \
+    gps.universal5420
+
+# Camera
+PRODUCT_PACKAGES += \
+    camera.universal5420 \
     libhwjpeg
 
 # Filesystem management tools
