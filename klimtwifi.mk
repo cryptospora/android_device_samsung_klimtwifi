@@ -23,6 +23,9 @@ else
 LOCAL_KERNEL := $(TARGET_PREBUILT_KERNEL)
 endif
 
+# Overlays
+DEVICE_PACKAGE_OVERLAYS += device/samsung/klimtwifi/overlay
+
 include $(LOCAL_PATH)/BoardConfig.mk
 
 LOCAL_PATH := device/samsung/klimtwifi
