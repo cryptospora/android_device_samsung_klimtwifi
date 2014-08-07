@@ -49,9 +49,9 @@ ARCH_ARM_HAVE_TLS_REGISTER := true
 # Kernel
 BOARD_KERNEL_BASE := 0x10000000
 BOARD_KERNEL_PAGESIZE := 2048
-TARGET_KERNEL_CONFIG := klimtwifi_01_defconfig
+TARGET_KERNEL_CONFIG := klimtwifi_00_defconfig
 TARGET_KERNEL_SOURCE := kernel/samsung/exynos5420
-TARGET_PREBUILT_KERNEL := device/samsung/klimtwifi/kernel
+#TARGET_PREBUILT_KERNEL := device/samsung/klimtwifi/kernel
 
 # Boot animation
 TARGET_BOOTANIMATION_PRELOAD := true
@@ -62,8 +62,7 @@ USE_OPENGL_RENDERER := true
 BOARD_EGL_CFG := $(LOCAL_PATH)/configs/egl.cfg
 BOARD_EGL_WORKAROUND_BUG_10194508 := true
 BOARD_USE_BGRA_8888 := true
-BOARD_USES_HGL := true
-NUM_FRAMEBUFFER_SURFACE_BUFFERS := 3
+NUM_FRAMEBUFFER_SURFACE_BUFFERS := 5
 OVERRIDE_RS_DRIVER := libRSDriverArm.so
 
 # Battery
@@ -139,13 +138,14 @@ BOARD_USES_NEON_BLITANTIH := true
 # Media
 COMMON_GLOBAL_CFLAGS += -DUSE_NATIVE_SEC_NV12TILED # use format from fw/native
 
-#SurfaceFlinger
+# SurfaceFlinger
 BOARD_USES_SYNC_MODE_FOR_MEDIA := true
 
 # Bluetooth
 BOARD_HAVE_BLUETOOTH := true
 BOARD_HAVE_BLUETOOTH_BCM := true
 BOARD_BLUEDROID_VENDOR_CONF := $(LOCAL_PATH)/bluetooth/libbt_vndcfg.txt
+BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := $(LOCAL_PATH)/bluetooth
 
 # Wifi
 BOARD_HAVE_SAMSUNG_WIFI          := true
@@ -171,5 +171,5 @@ COMMON_GLOBAL_CFLAGS += -DSAMSUNG_CAMERA_HARDWARE
 COMMON_GLOBAL_CFLAGS += -DSAMSUNG_DVFS
 
 # inherit from the proprietary version
--include vendor/samsung/i9500/BoardConfigVendor.mk
+-include vendor/samsung/klimtwifi/BoardConfigVendor.mk
 
