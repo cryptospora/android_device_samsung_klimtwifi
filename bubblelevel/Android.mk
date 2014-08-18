@@ -1,4 +1,4 @@
-# Copyright (C) 2013 The CyanogenMod Project
+# Copyright (C) 2012 The Android Open Source Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,15 +12,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Inherit from those products. Most specific first.
-$(call inherit-product, $(SRC_TARGET_DIR)/product/full_base.mk)
+LOCAL_PATH := $(call my-dir)
 
-# Inherit from klimtwifi device
-$(call inherit-product, device/samsung/klimtwifi/klimtwifi.mk)
+include $(CLEAR_VARS)
 
-# Discard inherited values and use our own instead.
-PRODUCT_NAME := full_klimtwifi
-PRODUCT_DEVICE := klimtwifi
-PRODUCT_BRAND := samsung
-PRODUCT_MANUFACTURER := samsung
-PRODUCT_MODEL := SM-T700
+LOCAL_MODULE := libbubblelevel
+LOCAL_SRC_FILES := \
+	BubbleLevelImpl.cpp
+
+LOCAL_SHARED_LIBRARIES := liblog libutils libgui libbinder
+LOCAL_MODULE_TAGS := optional
+
+include $(BUILD_SHARED_LIBRARY)

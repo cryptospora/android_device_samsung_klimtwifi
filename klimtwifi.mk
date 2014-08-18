@@ -30,6 +30,8 @@ include $(LOCAL_PATH)/BoardConfig.mk
 
 LOCAL_PATH := device/samsung/klimtwifi
 
+PRODUCT_TAGS += dalvik.gc.type-precise
+
 PRODUCT_CHARACTERISTICS := tablet
 
 # Boot animation
@@ -50,8 +52,8 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/rootdir/etc/init.recovery.universal5420.rc:/init.recovery.universal5420.rc
 
 # Bluetooth
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/bluetooth/bcm4350_prepatch.hcd:system/vendor/firmware/bcm4350_prepatch.hcd
+PRODUCT_PACKAGES += \
+    bluetooth.default
 
 # Sudo
 PRODUCT_PACKAGES += \
@@ -60,20 +62,24 @@ PRODUCT_PACKAGES += \
 # Audio
 PRODUCT_PACKAGES += \
     audio.primary.universal5420 \
+    audio.primary.default \
     audio.a2dp.default \
     audio.usb.default \
     audio.r_submix.default \
-    mixer_paths.xml \
-    tinymix
-
-# GPS
-PRODUCT_PACKAGES += \
-    gps.universal5420
+    libaudiohalcm \
+    libbubblelevel \
+    mixer_paths.xml
 
 # Camera
 PRODUCT_PACKAGES += \
     camera.universal5420 \
+    camera.default \
+    camera2 \
     libhwjpeg
+
+# Time
+PRODUCT_PACKAGES += \
+    local_time.default
 
 # Filesystem management tools
 PRODUCT_PACKAGES += \
@@ -89,7 +95,8 @@ PRODUCT_PACKAGES += \
 
 # Sensors
 PRODUCT_PACKAGES += \
-    sensors.universal5420
+    sensors.exynos5 \
+    lights.exynos5
 
 # IR
 PRODUCT_PACKAGES += \
@@ -106,18 +113,21 @@ PRODUCT_PACKAGES += \
 # Keylayouts
 PRODUCT_COPY_FILES += \
     vendor/samsung/klimtwifi/proprietary/usr/idc/Synaptics_HID_TouchPad.idc:system/usr/idc/Synaptics_HID_TouchPad.idc \
-    vendor/samsung/klimtwifi/proprietary//usr/keylayout/gpio-keys.kl:system/usr/keylayout/gpio-keys.kl 
+    vendor/samsung/klimtwifi/proprietary/usr/keylayout/gpio-keys.kl:system/usr/keylayout/gpio-keys.kl \
+    vendor/samsung/klimtwifi/proprietary/usr/keylayout/sec_touchkey.kl:system/usr/keylayout/sec_touchkey.kl 
 
 # Media profile
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/media_codecs.xml:system/etc/media_codecs.xml \
-    $(LOCAL_PATH)/configs/media_profiles.xml:system/etc/media_profiles.xml
+    $(LOCAL_PATH)/configs/media_profiles.xml:system/etc/media_profiles.xml \
+    $(LOCAL_PATH)/configs/audio_policy.conf:system/etc/audio_policy.conf
 
 # Misc
 PRODUCT_PACKAGES += \
+    librs_jni \
     com.android.future.usb.accessory
 
-# Samsung
+# Samsung 
 PRODUCT_PACKAGES += \
     SamsungServiceMode
 
@@ -134,6 +144,11 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     libnetcmdiface \
     macloader
+
+# for off charging mode
+PRODUCT_PACKAGES += \
+    charger \
+    charger_res_images
 
 # Set default USB interface
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
@@ -183,6 +198,7 @@ PRODUCT_AAPT_PREF_CONFIG := xxhdpi
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.ril.hsxpa=1 \
     ro.ril.gprsclass=10 \
+    ro.carrier=unknown \
     keyguard.no_require_sim=true
 
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -196,7 +212,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.hwui.text_small_cache_width=1024 \
     ro.hwui.text_small_cache_height=512 \
     ro.hwui.text_large_cache_width=2048 \
-    ro.hwui.text_large_cache_height=1024
+    ro.hwui.text_large_cache_height=1024 \
+    ro.hwui.disable_scissor_opt=true
 
 PRODUCT_PROPERTY_OVERRIDES += \
     dalvik.vm.heapstartsize=16m \
@@ -206,7 +223,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
     dalvik.vm.heapminfree=2m \
     dalvik.vm.heapmaxfree=8m
 
+PRODUCT_LOCALES := en_US
 
 # call the proprietary setup
 $(call inherit-product-if-exists, vendor/samsung/klimtwifi/klimtwifi-vendor.mk)
+$(call inherit-product-if-exists, vendor/bk/config/common_full.mk)
 $(call inherit-product, hardware/samsung_slsi/exynos5/exynos5.mk)
+$(call inherit-product-if-exists, hardware/broadcom/wlan/bcmdhd/firmware/bcm4350/device-bcm.mk)

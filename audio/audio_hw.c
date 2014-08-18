@@ -67,7 +67,7 @@
 
 struct pcm_config pcm_config_fast = {
     .channels = 2,
-    .rate = 48000,
+    .rate = 44100,
     .period_size = 240,
     .period_count = 2,
     .format = PCM_FORMAT_S16_LE,
@@ -75,7 +75,7 @@ struct pcm_config pcm_config_fast = {
 
 struct pcm_config pcm_config_deep = {
     .channels = 2,
-    .rate = 48000,
+    .rate = 44100,
     .period_size = 3840,
     .period_count = 2,
     .format = PCM_FORMAT_S16_LE,
@@ -83,7 +83,7 @@ struct pcm_config pcm_config_deep = {
 
 struct pcm_config pcm_config_in = {
     .channels = 2,
-    .rate = 48000,
+    .rate = 44100,
     .period_size = 240,
     .period_count = 2,
     .format = PCM_FORMAT_S16_LE,
@@ -193,25 +193,32 @@ struct stream_in {
     struct audio_stream_in stream;
 
     pthread_mutex_t lock;       /* see note below on mutex acquisition order */
-    struct pcm *pcm;
+    struct pcm *pcm[PCM_TOTAL];
+    struct pcm_config config;
+    unsigned int pcm_device;
     bool standby;
+    audio_devices_t device;
 
-    unsigned int requested_rate;
     struct resampler_itfe *resampler;
-    struct resampler_buffer_provider buf_provider;
+    struct echo_reference_itfe *echo_reference;
     int16_t *buffer;
+    size_t buffer_frames;
+    unsigned int requested_rate;
+
+    struct resampler_buffer_provider buf_provider;
     size_t frames_in;
     int read_status;
 
     audio_source_t input_source;
     audio_io_handle_t io_handle;
-    audio_devices_t device;
 
     uint16_t ramp_vol;
     uint16_t ramp_step;
     uint16_t ramp_frames;
 
     audio_channel_mask_t channel_mask;
+    /* Array of supported channel mask configurations. +1 so that the last entry is always 0 */
+    audio_channel_mask_t supported_channel_masks[MAX_SUPPORTED_CHANNEL_MASKS + 1];
 
     struct audio_device *dev;
 };
@@ -601,11 +608,11 @@ static int start_input_stream(struct stream_in *in)
 {
     struct audio_device *adev = in->dev;
 
-    in->pcm = pcm_open(PCM_CARD, PCM_DEVICE_IN, PCM_IN, &pcm_config_in);
+    in->pcm[PCM_CARD] = pcm_open(PCM_CARD, in->pcm_device, PCM_IN, &pcm_config_in);
 
-    if (in->pcm && !pcm_is_ready(in->pcm)) {
-        ALOGE("pcm_open() failed: %s", pcm_get_error(in->pcm));
-        pcm_close(in->pcm);
+    if (in->pcm[PCM_CARD] && !pcm_is_ready(in->pcm[PCM_CARD])) {
+        ALOGE("pcm_open() failed: %s", pcm_get_error(in->pcm[PCM_CARD]));
+        pcm_close(in->pcm[PCM_CARD]);
         return -ENOMEM;
     }
 
@@ -664,7 +671,7 @@ static int get_next_buffer(struct resampler_buffer_provider *buffer_provider,
     in = (struct stream_in *)((char *)buffer_provider -
                                    offsetof(struct stream_in, buf_provider));
 
-    if (in->pcm == NULL) {
+    if (in->pcm[PCM_CARD] == NULL) {
         buffer->raw = NULL;
         buffer->frame_count = 0;
         in->read_status = -ENODEV;
@@ -672,9 +679,9 @@ static int get_next_buffer(struct resampler_buffer_provider *buffer_provider,
     }
 
     if (in->frames_in == 0) {
-        in->read_status = pcm_read(in->pcm,
+        in->read_status = pcm_read(in->pcm[PCM_CARD],
                                    (void*)in->buffer,
-                                   pcm_frames_to_bytes(in->pcm, pcm_config_in.period_size));
+                                   pcm_frames_to_bytes(in->pcm[PCM_CARD], pcm_config_in.period_size));
         if (in->read_status != 0) {
             ALOGE("get_next_buffer() pcm_read error %d", in->read_status);
             buffer->raw = NULL;
@@ -1075,8 +1082,8 @@ static int do_in_standby(struct stream_in *in)
     struct audio_device *adev = in->dev;
 
     if (!in->standby) {
-        pcm_close(in->pcm);
-        in->pcm = NULL;
+        pcm_close(in->pcm[PCM_CARD]);
+        in->pcm[PCM_CARD] = NULL;
 
         if (in->device & AUDIO_DEVICE_IN_BLUETOOTH_SCO_HEADSET)
             end_bt_sco(adev);
