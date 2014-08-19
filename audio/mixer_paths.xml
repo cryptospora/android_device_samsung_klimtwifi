@@ -377,6 +377,7 @@ INPUT_CHANNEL_MAP {
   <path name="voice-rec-main-mic">
     <path name="channel-left" />
     <path name="builtin-mic" />
+    <path name="back-mic" />
   </path>
 
   <path name="communication-main-mic">
