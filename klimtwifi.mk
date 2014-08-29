@@ -127,10 +127,6 @@ PRODUCT_PACKAGES += \
     librs_jni \
     com.android.future.usb.accessory
 
-# Samsung 
-PRODUCT_PACKAGES += \
-    SamsungServiceMode
-
 # Torch
 PRODUCT_PACKAGES += \
     Torch
@@ -150,23 +146,10 @@ PRODUCT_PACKAGES += \
     charger \
     charger_res_images
 
-# Set default USB interface
-PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
-    persist.sys.usb.config=mtp
-
-# Enable repeatable keys in CWM
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.cwm.enable_key_repeat=true \
-    ro.cwm.repeatable_keys=114,115
-
 # System properties
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.sf.lcd_density=320 \
-    ro.opengles.version=196608 \
-    ro.sapa.jack.master=alsa \
-    ro.hdcp2.rx=tz \
-    ro.secwvk=220 \
-    ro.securestorage.support=true
+    ro.opengles.version=196608
 
 # Permissions
 PRODUCT_COPY_FILES += \

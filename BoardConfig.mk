@@ -40,6 +40,7 @@ TARGET_CPU_ABI2 := armeabi
 TARGET_CPU_SMP := true
 TARGET_CPU_VARIANT := cortex-a15
 APP_ABI := armeabi-v7a
+LOCAL_SDK_VERSION := 9
 
 # Kernel
 BOARD_KERNEL_BASE := 0x10000000
@@ -48,12 +49,6 @@ TARGET_KERNEL_CONFIG := klimtwifi_01_defconfig
 TARGET_KERNEL_SOURCE := kernel/samsung/exynos5420
 TARGET_KERNEL_CUSTOM_TOOLCHAIN := arm-eabi-4.7
 #TARGET_PREBUILT_KERNEL := device/samsung/klimtwifi/kernel
-
-# Graphics
-USE_OPENGL_RENDERER := true
-BOARD_EGL_CFG := $(LOCAL_PATH)/configs/egl.cfg
-NUM_FRAMEBUFFER_SURFACE_BUFFERS := 3
-# OVERRIDE_RS_DRIVER := libRSDriverArm.so
 
 # Battery
 BOARD_CHARGING_MODE_BOOTING_LPM := /sys/class/power_supply/battery/batt_lp_charging
@@ -68,6 +63,7 @@ BOARD_RECOVERYIMAGE_PARTITION_SIZE := 10485760
 BOARD_SYSTEMIMAGE_PARTITION_SIZE := 2527068160
 BOARD_USERDATAIMAGE_PARTITION_SIZE := 12532580352
 BOARD_FLASH_BLOCK_SIZE := 4096
+BOARD_MOUNT_SDCARD_RW := true
 
 # Recovery
 BOARD_USE_CUSTOM_RECOVERY_FONT := \"roboto_23x41.h\"
@@ -79,22 +75,29 @@ BOARD_RECOVERY_SWIPE := true
 RECOVERY_GRAPHICS_USE_LINELENGTH := true
 
 # SELinux
-BOARD_SEPOLICY_DIRS += \
-    device/samsung/klimtwifi/sepolicy
+BOARD_SEPOLICY_DIRS := \
+        device/samsung/klimtwifi/sepolicy
 
 BOARD_SEPOLICY_UNION := \
-    file_contexts \
-    device.te \
-    domain.te \
-    gpsd.te \
-    mediaserver.te \
-    surfaceflinger.te \
-    system.te
+        file_contexts \
+        genfs_contexts \
+        adbd.te \
+        app.te \
+        device.te \
+        domain.te \
+        gpsd.te \
+        file.te \
+        mediaserver.te \
+        surfaceflinger.te \
+	samsung_media.te \
+	samsung_drm.te \
+        system.te
+
 
 # Camera
-BOARD_NEEDS_MEMORYHEAPION := true
+COMMON_GLOBAL_CFLAGS += -DUSE_MEMORY_HEAP_ION
 COMMON_GLOBAL_CFLAGS += -DDISABLE_HW_ID_MATCH_CHECK
-COMMON_GLOBAL_CFLAGS += -DNEEDS_VECTORIMPL_SYMBOLS
+#COMMON_GLOBAL_CFLAGS += -DNEEDS_VECTORIMPL_SYMBOLS
 COMMON_GLOBAL_CFLAGS += -DSAMSUNG_CAMERA_HARDWARE
 COMMON_GLOBAL_CFLAGS += -DSAMSUNG_DVFS
 
@@ -117,23 +120,49 @@ BOARD_HOSTAPD_PRIVATE_LIB        := lib_driver_cmd_bcmdhd
 WIFI_DRIVER_FW_PATH_PARAM        := "/sys/module/dhd/parameters/firmware_path"
 WIFI_DRIVER_FW_PATH_STA          := "/system/etc/wifi/bcmdhd_sta.bin"
 WIFI_DRIVER_FW_PATH_AP           := "/system/etc/wifi/bcmdhd_apsta.bin"
-
-BOARD_CHARGER_DISABLE_INIT_BLANK := true
+WIFI_DRIVER_FW_PATH_IBSS         := "/system/etc/wifi/bcmdhd_ibss.bin"
+WIFI_DRIVER_FW_PATH_MFG          := "/system/etc/wifi/bcmdhd_mfg.bin"
+WIFI_BAND                        := 802_11_ABG
 
 # Samsung OpenMAX Video
 BOARD_USE_STOREMETADATA := true
 BOARD_USE_METADATABUFFERTYPE := true
-BOARD_USE_S3D_SUPPORT := true
 BOARD_USE_DMA_BUF := true
 BOARD_USE_ANB_OUTBUF_SHARE := true
-BOARD_USE_GSC_RGB_ENCODER := true
 BOARD_USE_IMPROVED_BUFFER := true
+BOARD_USE_NON_CACHED_GRAPHICBUFFER := true
+BOARD_USE_GSC_RGB_ENCODER := true
 BOARD_USE_CSC_HW := false
-BOARD_USE_H264_PREPEND_SPS_PPS := false
 BOARD_USE_QOS_CTRL := false
+BOARD_USE_S3D_SUPPORT := true
 BOARD_USE_VP8ENC_SUPPORT := true
-BOARD_USE_ENCODER_RGBINPUT_SUPPORT := true
-BOARD_USE_DUALDPB_MODE := true
+
+# Graphics
+USE_OPENGL_RENDERER := true
+BOARD_EGL_CFG := $(LOCAL_PATH)/configs/egl.cfg
+NUM_FRAMEBUFFER_SURFACE_BUFFERS := 5
+OVERRIDE_RS_DRIVER := libRSDriverArm.so
+
+# FIMG2D
+BOARD_USES_FIMGAPI_V4L2 := true
+BOARD_USES_SKIA_FIMGAPI := true
+BOARD_USES_NEON_BLITANTIH := true
+
+# SCALER
+BOARD_USES_SCALER := true
+
+# Keymaster
+BOARD_USES_TRUST_KEYMASTER := false
+
+# G3D
+BOARD_USE_BGRA_8888 := true
+
+# HDMI
+BOARD_USES_GSC_VIDEO := true
+BOARD_USES_CEC := true
+
+# GSC
+BOARD_USES_ONLY_GSC0_GSC1 := true
 
 # inherit from the proprietary version
 -include vendor/samsung/klimtwifi/BoardConfigVendor.mk

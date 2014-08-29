@@ -88,3 +88,8 @@
 /dev/socket/kipc   u:object_r:kipc_socket:s0
 /dev/socket/cfiat  u:object_r:cfiat_socket:s0
 /dev/socket/msockets(/.*)?	u:object_r:msockets_socket:s0
+
+# DRM
+/data/data/.drm(/.*)?	u:object_r:drm_data_file:s0
+/system/etc/security/.drm	u:object_r:drm_security_system_file:s0
+/system/lib/drm			u:object_r:drm_lib_system_file:s0
