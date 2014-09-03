@@ -149,7 +149,10 @@ PRODUCT_PACKAGES += \
 # System properties
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.sf.lcd_density=320 \
-    ro.opengles.version=196608
+    ro.opengles.version=196608 \
+    fw.max_users=4 \
+    ro.adb.qemud=1 \
+    sys.perf.profile=1
 
 # Permissions
 PRODUCT_COPY_FILES += \
@@ -174,8 +177,8 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.bluetooth_le.xml:system/etc/permissions/android.hardware.bluetooth_le.xml
 
 # Device uses high-density artwork where available
-PRODUCT_AAPT_CONFIG := normal hdpi xhdpi xxhdpi
-PRODUCT_AAPT_PREF_CONFIG := xxhdpi
+PRODUCT_AAPT_CONFIG := normal hdpi xhdpi xxhdpi xxxhdpi
+PRODUCT_AAPT_PREF_CONFIG := xxxhdpi
 
 # Radio
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -210,6 +213,5 @@ PRODUCT_LOCALES := en_US
 
 # call the proprietary setup
 $(call inherit-product-if-exists, vendor/samsung/klimtwifi/klimtwifi-vendor.mk)
-$(call inherit-product-if-exists, vendor/bk/config/common_full.mk)
 $(call inherit-product, hardware/samsung_slsi/exynos5/exynos5.mk)
 $(call inherit-product-if-exists, hardware/broadcom/wlan/bcmdhd/firmware/bcm4350/device-bcm.mk)

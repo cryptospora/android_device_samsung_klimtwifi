@@ -1,5 +1,8 @@
 $(call inherit-product, device/samsung/klimtwifi/full_klimtwifi.mk)
 
+# Inherit some common CM stuff.
+$(call inherit-product, vendor/cm/config/common_full_tablet_wifionly.mk)
+
 PRODUCT_NAME := aosp_klimtwifi
 PRODUCT_DEVICE := klimtwifi
 

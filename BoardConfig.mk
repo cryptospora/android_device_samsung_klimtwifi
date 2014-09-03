@@ -164,5 +164,12 @@ BOARD_USES_CEC := true
 # GSC
 BOARD_USES_ONLY_GSC0_GSC1 := true
 
+# VirtualDisplay
+BOARD_USES_VIRTUAL_DISPLAY := true
+
+# WFD 
+BOARD_USES_WFD_SERVICE := true
+BOARD_USES_WFD := true
+
 # inherit from the proprietary version
 -include vendor/samsung/klimtwifi/BoardConfigVendor.mk
