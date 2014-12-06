@@ -1,14 +1,3 @@
-Skip to content
-Sign up Sign in This repository
-Explore
-Features
-Enterprise
-Blog
- Star 2  Fork 6 eousphoros/android_device_samsung_klimtwifi
- branch: aosp android_device_samsung_klimtwifi/camera/CameraWrapper.cpp
-Patrick Buckleyeousphoros on Aug 17 Sync with release 4
-1 contributor
-623 lines (494 sloc)  17.862 kb RawBlameHistory  
 /*
  * Copyright (C) 2014, The CyanogenMod Project
  *
