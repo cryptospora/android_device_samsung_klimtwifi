@@ -80,8 +80,8 @@ PRODUCT_PACKAGES += \
 # HW composer
 PRODUCT_PACKAGES += \
     libion \
-    hwcomposer.exynos5 \
-    gralloc.exynos5
+    hwcomposer.exynos5 
+    # gralloc.exynos5
 
 # Sensors
 PRODUCT_PACKAGES += \
@@ -133,7 +133,7 @@ PRODUCT_PACKAGES += \
 
 # Set default USB interface
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
-    persist.sys.usb.config=mtp
+    persist.sys.usb.config=adb
 
 # Enable repeatable keys in CWM
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -199,5 +199,4 @@ PRODUCT_PROPERTY_OVERRIDES += \
 $(call inherit-product-if-exists, frameworks/native/build/phone-xxhdpi-2048-dalvik-heap.mk)
 
 # call the proprietary setup
-$(call inherit-product-if-exists, vendor/samsung/klimtwifi/klimtwifi-vendor.mk)
 $(call inherit-product, hardware/samsung_slsi/exynos5/exynos5.mk)
